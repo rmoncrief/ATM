@@ -30,7 +30,7 @@ namespace ATM.Models
             }
         }
 
-        public virtual ApplicationDbContext User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         public string ApplicationUserId { get; set; }
     }
