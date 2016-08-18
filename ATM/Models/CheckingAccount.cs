@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ATM.Models
@@ -37,5 +38,7 @@ namespace ATM.Models
 
         [Required]
         public string ApplicationUserId { get; set; }
+
+        public virtual ICollection<Transaction> Transactions { get; set; } 
     }
 }
