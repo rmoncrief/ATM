@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ATM.Models
 {
@@ -8,6 +9,8 @@ namespace ATM.Models
 
         [Required]
         [RegularExpression(@"\d{6,10}", ErrorMessage = "Account # must be between 6 and 10 characters")]
+        [Column(TypeName = "varchar")]
+        [StringLength(10)]
         [Display(Name = "Account #")]
         public string AccountNumber { get; set; }
 
@@ -32,6 +35,7 @@ namespace ATM.Models
 
         public virtual ApplicationUser User { get; set; }
 
+        [Required]
         public string ApplicationUserId { get; set; }
     }
 }

@@ -80,3 +80,6 @@ c:\users\robert.moncrief\documents\visual studio 2015\Projects\ATM\ATM\bin\Micro
 c:\users\robert.moncrief\documents\visual studio 2015\Projects\ATM\ATM\obj\Debug\ATM.csprojResolveAssemblyReference.cache
 c:\users\robert.moncrief\documents\visual studio 2015\Projects\ATM\ATM\obj\Debug\ATM.dll
 c:\users\robert.moncrief\documents\visual studio 2015\Projects\ATM\ATM\obj\Debug\ATM.pdb
+C:\Users\robert.moncrief\documents\visual studio 2015\Projects\ATM\ATM\obj\Debug\ATM.Migrations.InitialCreate.resources
+C:\Users\robert.moncrief\documents\visual studio 2015\Projects\ATM\ATM\obj\Debug\ATM.csproj.GenerateResource.Cache
+C:\Users\robert.moncrief\documents\visual studio 2015\Projects\ATM\ATM\obj\Debug\ATM.Migrations.AccountNumberChanges.resources
