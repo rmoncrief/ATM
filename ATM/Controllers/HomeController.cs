@@ -7,7 +7,7 @@ namespace ATM.Controllers
 {
     public class HomeController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext(); 
+        private readonly ApplicationDbContext db = new ApplicationDbContext();
 
         public ActionResult Index()
         {

@@ -13,6 +13,7 @@ namespace ATM.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Deposit(Transaction transaction)
         {
             if (ModelState.IsValid)

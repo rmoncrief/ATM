@@ -1,4 +1,5 @@
 ﻿using ATM.Models;
+using ATM.Services;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -152,18 +153,8 @@ namespace ATM.Controllers
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var db = new ApplicationDbContext();
-                    var accountNumber = (123456 + db.CheckingAccounts.Count()).ToString().PadLeft(10, '0');
-                    var checkingAccount = new CheckingAccount
-                    {
-                        Firstname = model.Firstname,
-                        Lastname = model.Lastname,
-                        AccountNumber = accountNumber,
-                        Balence = 0,
-                        ApplicationUserId = user.Id
-                    };
-                    db.CheckingAccounts.Add(checkingAccount);
-                    db.SaveChanges();
+                    var service = new CheckingAccountService(HttpContext.GetOwinContext().Get<ApplicationDbContext>());
+                    service.CreateCheckingAccount(model.Firstname, model.Lastname, user.Id, 0);
 
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
@@ -384,6 +375,8 @@ namespace ATM.Controllers
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
+                        var service = new CheckingAccountService(HttpContext.GetOwinContext().Get<ApplicationDbContext>());
+                        service.CreateCheckingAccount("Facebok", "User", user.Id, 500);
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         return RedirectToLocal(returnUrl);
                     }
