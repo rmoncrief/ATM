@@ -5,8 +5,19 @@ namespace ATM.Controllers
 {
     public class TransactionController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IApplicationDbContext db;
 
+        public TransactionController()
+        {
+            db = new ApplicationDbContext();
+        }
+        public TransactionController(IApplicationDbContext dbContext)
+        {
+            db = dbContext;
+        }
+
+
+        // GET: Transaction/Deposit
         public ActionResult Deposit(int checkingAccountId)
         {
             return View();

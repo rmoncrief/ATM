@@ -38,7 +38,7 @@ namespace ATM.Controllers
             //TODO: sned message to hq
             ViewBag.TheMessage = "Thanks, Got your message";
 
-            return View();
+            return PartialView(viewName: "_ContactThanks");
         }
 
         public ActionResult Serial(string letterCase)
