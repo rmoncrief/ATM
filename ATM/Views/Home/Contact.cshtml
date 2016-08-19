@@ -18,14 +18,32 @@
 
 
 <div id="formSection">
-    <h3>@ViewBag.TheMessage</h3>
+  
+      @*<h3>@ViewBag.TheMessage</h3>
     @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "formSection" }))
     {
         <textarea name="message"></textarea>
         <input type="submit" value="Send" />
-    }
+    }*@
+
+    <h3>@ViewBag.TheMessage</h3>
+    <form method="post" id="contactForm">
+        <textarea name="message" id="message"></textarea>
+        <input type="submit" value="Send" />
+    </form>
+    <img src="~/Content/Images/Moving-picture-green-spinning-dollar-sign-animated-gif.gif" id="progress" style="display:none;" />
 </div>
 
 @section scripts{ 
-<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+@*<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+    <script>
+        $('#contactForm').submit(function () {
+            $('#progress').show();
+            $.post('', { message: $('#message').val() })
+                .done(function (response) { 
+                    setTimeout(function () { $('#formSection').html(response); }, 2000);
+                });
+            return false;
+        });
+    </script>
 }
