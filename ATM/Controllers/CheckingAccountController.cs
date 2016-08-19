@@ -1,10 +1,16 @@
 ﻿using ATM.Models;
+using Microsoft.AspNet.Identity;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace ATM.Controllers
+
+
 {
+    [Authorize]
     public class CheckingAccountController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         // GET: CheckingAccount
         public ActionResult Index()
         {
@@ -14,14 +20,23 @@ namespace ATM.Controllers
         // GET: CheckingAccount/Details/5
         public ActionResult Details()
         {
-            var checkingAccount = new CheckingAccount
-            {
-                AccountNumber = "0000123456",
-                Firstname = "Robert",
-                Lastname = "Moncrief",
-                Balence = 500
-            };
+            var userId = User.Identity.GetUserId();
+            var checkingAccount = db.CheckingAccounts.Where(c => c.ApplicationUserId == userId).First();
             return View(checkingAccount);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult DetailsForAdmin(int id)
+        {
+            var userId = User.Identity.GetUserId();
+            var checkingAccount = db.CheckingAccounts.Find(id);
+            return View("Details", checkingAccount);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult List()
+        {
+            return View(db.CheckingAccounts.ToList());
         }
 
         // GET: CheckingAccount/Create
